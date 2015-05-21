@@ -1,7 +1,7 @@
 {
   "name": "json-ml",
-  "main": "json-ml.min.js",
-  "version": "0.0.0-beta",
+  "main": "json_ml.min.js",
+  "version": "0.0.0",
   "description": "JsonML parse/stringify function.",
 
   "homepage": "https://github.com/59naga/json-ml",

@@ -1,14 +1,16 @@
 {
   "name": "json_ml",
-  "main": "jsonml",
-  "bin":  "jsonml",
-  "version": "0.0.0",
+  "main": "json_ml",
+  "bin": {
+    "json_ml": "jsonml"  
+  },
+  "version": "0.0.1-alpha.0",
   "description": "JsonML parse/stringify function.",
 
   "scripts": {
     "postinstall": "coffee -o lib -c src",
 
-    "build": "browserify src/index.coffee -t coffeeify -s JSONML --extension .coffee | uglifyjs -cm > jsonml.min.js",
+    "build": "browserify src/index.coffee -t coffeeify -s JSONML --extension .coffee | uglifyjs -cm > json_ml.min.js",
     "update": "git tag v$(jqn bower version) &&  git push --tags",
 
     "start": "jasminetea test --verbose --watch",
