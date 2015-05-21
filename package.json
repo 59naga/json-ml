@@ -1,6 +1,7 @@
 {
   "name": "json_ml",
   "main": "jsonml",
+  "bin":  "jsonml",
   "version": "0.0.0",
   "description": "JsonML parse/stringify function.",
 
