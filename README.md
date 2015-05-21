@@ -102,8 +102,8 @@ License
 
 [sauce-image]: http://soysauce.berabou.me/59naga/json-ml.svg
 [sauce]: https://saucelabs.com/u/json-ml
-[npm-image]:https://img.shields.io/npm/v/json-ml.svg?style=flat-square
-[npm]: https://npmjs.org/package/json-ml
+[npm-image]:https://img.shields.io/npm/v/json_ml.svg?style=flat-square
+[npm]: https://npmjs.org/package/json_ml
 [travis-image]: http://img.shields.io/travis/59naga/json-ml.svg?style=flat-square
 [travis]: https://travis-ci.org/59naga/json-ml
 [coveralls-image]: http://img.shields.io/coveralls/59naga/json-ml.svg?style=flat-square
