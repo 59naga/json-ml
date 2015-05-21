@@ -1,6 +1,6 @@
 {
-  "name": "json-ml",
-  "main": "json-ml",
+  "name": "json_ml",
+  "main": "jsonml",
   "version": "0.0.0-beta",
   "description": "JsonML parse/stringify function.",
 
@@ -31,6 +31,11 @@
     "zuul": "git://github.com/59naga/zuul.git#5592c010065562e674a0a5d08598359008a518bd"
   },
 
+  "keywords": [
+    "jsonml",
+    "html",
+    "xml"
+  ],
   "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
   "license": "MIT",
   "directories": {

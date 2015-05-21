@@ -7,19 +7,19 @@
 ## Installation
 ### Via npm
 ```bash
-$ npm install json-ml --save
+$ npm install json_ml --save
 ```
 ```js
-var JSONML= require('json-ml');
+var JSONML= require('json_ml');
 console.log(JSONML); //function
 ```
 
 ### Via bower
 ```bash
-$ bower install json-ml --save
+$ bower install json_ml --save
 ```
 ```html
-<script src="bower_components/json-ml/json-ml.min.js"></script>
+<script src="bower_components/json_ml/json-ml.min.js"></script>
 <script>
   console.log(JSONML); //function
 </script>
@@ -79,14 +79,14 @@ JSONML.stringify([['ul',['li',{style:"color:red"}],['li',{title:"Some hover text
 
 ## CLI
 ```bash
-$ npm install json-ml --global
-$ json-ml -V
+$ npm install json_ml --global
+$ jsonml -V
 # 0.0.0-beta
 
-$ echo '<ul><li style="color:red">First Item</li><li title="Some hover text." style="color:green">Second Item</li><li><span class="code-example-third">Third</span>Item</li></ul>' | json-ml
+$ echo '<ul><li style="color:red">First Item</li><li title="Some hover text." style="color:green">Second Item</li><li><span class="code-example-third">Third</span>Item</li></ul>' | jsonml
 # [["ul",["li",{"style":"color:red"}],["li",{"title":"Some hover text.","style":"color:green"}],["li",["span",{"class":"code-example-third"}]]]]
 
-$ json-ml ul.json
+$ jsonml ul.json
 # <ul>
 #   <li style="color:red"></li>
 #   <li title="Some hover text." style="color:green"></li>
