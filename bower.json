@@ -1,0 +1,19 @@
+{
+  "name": "json-ml",
+  "main": "json-ml.min.js",
+  "version": "0.0.0-beta",
+  "description": "JsonML parse/stringify function.",
+
+  "homepage": "https://github.com/59naga/json-ml",
+  "authors": [
+    "59naga <i59naga@icloud.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "json-ml",
+    "src",
+    "test",
+    "*.coffee"
+  ]
+}

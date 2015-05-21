@@ -1,0 +1,47 @@
+{
+  "name": "json-ml",
+  "main": "json-ml",
+  "version": "0.0.0-beta",
+  "description": "JsonML parse/stringify function.",
+
+  "scripts": {
+    "post-install": "coffee -o lib -c src",
+
+    "build": "browserify src/index.coffee -t coffeeify -s JSONML --extension .coffee | uglifyjs -cm > json-ml.min.js",
+    "update": "git tag v$(jqn bower version) &&  git push --tags",
+
+    "start": "jasminetea test --verbose --watch",
+    "test": "jasminetea test --verbose",
+    "posttest": "zuul test/API.spec.coffee --report"
+  },
+  
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "cheerio": "^0.19.0",
+    "coffee-script": "^1.9.2",
+    "commander": "^2.8.1",
+    "js-beautify": "^1.5.5"
+  },
+  "devDependencies": {
+    "brfs": "^1.4.0",
+    "browserify": "^10.2.1",
+    "coffeeify": "^1.1.0",
+    "jasmine": "^2.3.1",
+    "jasminetea": "^0.1.30-rc.3",
+    "zuul": "git://github.com/59naga/zuul.git#5592c010065562e674a0a5d08598359008a518bd"
+  },
+
+  "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/59naga/json-ml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/59naga/json-ml/issues"
+  },
+  "homepage": "https://github.com/59naga/json-ml#readme"
+}

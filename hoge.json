@@ -1,0 +1,27 @@
+[
+  [
+    "ul",
+    [
+      "li",
+      {
+        "style": "color:red"
+      }
+    ],
+    [
+      "li",
+      {
+        "title": "Some hover text.",
+        "style": "color:green"
+      }
+    ],
+    [
+      "li",
+      [
+        "span",
+        {
+          "class": "code-example-third"
+        }
+      ]
+    ]
+  ]
+]

@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+var JSONML;
+if(require('module')._extensions['.coffee']==null){
+  JSONML= require('./lib');
+}
+else{
+  JSONML= require('./src');
+}
+
+if(module.parent===null){
+  new JSONML(process.argv);
+}
+
+module.exports= JSONML;

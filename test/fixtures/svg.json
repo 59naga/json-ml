@@ -1,0 +1,73 @@
+[
+  [
+    "svg",
+    {
+      "version": "1.1",
+      "xmlns": "http://www.w3.org/2000/svg",
+      "xmlns:xlink": "http://www.w3.org/1999/xlink",
+      "shape-rendering": "crispEdges",
+      "width": "128",
+      "height": "128",
+      "viewBox": "0 0 128 128"
+    },
+    [
+      "g",
+      [
+        "path",
+        {
+          "fill": "rgba(185,0,0,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(0,80,0,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(20,20,40,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(255,252,190,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(255,155,124,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(121,55,0,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(200,210,159,1.00)",
+          "d": ""
+        }
+      ],
+      [
+        "path",
+        {
+          "fill": "rgba(110,159,86,1.00)",
+          "d": ""
+        }
+      ]
+    ]
+  ]
+]
