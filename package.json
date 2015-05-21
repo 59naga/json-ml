@@ -4,16 +4,20 @@
   "bin": {
     "jsonml": "json_ml"
   },
-  "version": "0.0.1-alpha.0",
   "description": "JsonML parse/stringify function.",
+  "version": "0.0.1-alpha.2",
+  
   "scripts": {
     "postinstall": "coffee -o lib -c src",
+
     "build": "browserify src/index.coffee -t coffeeify -s JSONML --extension .coffee | uglifyjs -cm > json_ml.min.js",
     "update": "git tag v$(jqn bower version) &&  git push --tags",
+
     "start": "jasminetea test --verbose --watch",
     "test": "jasminetea test --verbose --cover --report",
     "posttest": "zuul test/API.spec.coffee --report"
   },
+
   "dependencies": {
     "bluebird": "^2.9.25",
     "cheerio": "^0.19.0",
@@ -28,8 +32,10 @@
     "jasmine": "^2.3.1",
     "jasminetea": "^0.1.30-rc.3",
     "jqn": "0.0.3",
+    "uglifyjs": "^2.4.10",
     "zuul": "git://github.com/59naga/zuul.git#5592c010065562e674a0a5d08598359008a518bd"
   },
+
   "keywords": [
     "jsonml",
     "html",

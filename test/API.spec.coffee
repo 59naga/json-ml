@@ -9,61 +9,70 @@ xmlJson= require './fixtures/svg'
 
 # Spec
 describe 'API',->
-  describe 'JSONML.stringifyListMode= true',->
-    it 'parse',->
-      expect(JSONML.parse xml).toEqual xmlJson
-
-    it 'stringify',->
-      expect(JSONML.stringify xmlJson,null,2).toEqual xml
-
-  # Grammar (BNF) via http://www.jsonml.org/
-  describe 'JSONML.stringifyListMode= false',->
+  describe 'on: stringifyListMode',->
     beforeAll ->
-      JSONML.stringifyListMode= false
-    afterAll ->
       JSONML.stringifyListMode= true
 
-    it 'Plain text',->
-      fixture= 'textNode'
+    describe 'parse',->
+      it 'ballet elements',->
+        expect(JSONML.parse xml).toEqual xmlJson
+      it 'has textContent',->
+        object= JSONML.parse '<foo bar="baz"><beep>boop</beep></foo>'
 
-      element= JSONML.stringify fixture
-      expect(element).toBe 'textNode'
+        expect(object).toEqual [['foo',{bar:'baz'},['beep','boop']]]
 
-    it 'Tag',->
-      fixture= ['ul']
+    describe 'stringify',->
+      it 'stringify',->
+        expect(JSONML.stringifyListMode).toBe true
+        expect(JSONML.stringify xmlJson,null,2).toEqual xml
 
-      element= JSONML.stringify fixture
-      expect(element).toBe '<ul></ul>'
+  # Grammar (BNF) via http://www.jsonml.org/
+  describe 'off: JSONML.stringifyListMode',->
+    beforeAll ->
+      JSONML.stringifyListMode= false
 
-    it 'Attribute',->
-      fixture= ['ul',{id:'toc'}]
+    describe 'stringify',->
+      it 'Plain text',->
+        fixture= 'textNode'
 
-      element= JSONML.stringify fixture
-      expect(element).toBe '<ul id="toc"></ul>'
+        element= JSONML.stringify fixture
+        expect(element).toBe 'textNode'
 
-    it 'Attribute List',->
-      fixture= ['ul',{id:'toc',class:'header'}]
+      it 'Tag',->
+        fixture= ['ul']
 
-      element= JSONML.stringify fixture
-      expect(element).toBe '<ul id="toc" class="header"></ul>'
+        element= JSONML.stringify fixture
+        expect(element).toBe '<ul></ul>'
 
-    it 'Mixin',->
-      fixture= ['ui',{id:'toc'},['li'],'li',['li']]
+      it 'Attribute',->
+        fixture= ['ul',{id:'toc'}]
 
-      element= JSONML.stringify fixture
-      expect(element).toBe '<ui id="toc"><li></li>li<li></li></ui>'
+        element= JSONML.stringify fixture
+        expect(element).toBe '<ul id="toc"></ul>'
 
-    it 'title.texContent',->
-      fixture= [
-        "meta"
-        {
-          "charset": "UTF-8"
-        }
-        [
-          "title"
-          "http://www.jsonml.org/"
+      it 'Attribute List',->
+        fixture= ['ul',{id:'toc',class:'header'}]
+
+        element= JSONML.stringify fixture
+        expect(element).toBe '<ul id="toc" class="header"></ul>'
+
+      it 'Mixin',->
+        fixture= ['ui',{id:'toc'},['li'],'li',['li']]
+
+        element= JSONML.stringify fixture
+        expect(element).toBe '<ui id="toc"><li></li>li<li></li></ui>'
+
+      it 'title.texContent',->
+        fixture= [
+          "meta"
+          {
+            "charset": "UTF-8"
+          }
+          [
+            "title"
+            "http://www.jsonml.org/"
+          ]
         ]
-      ]
 
-      element= JSONML.stringify fixture
-      expect(element).toBe '<meta charset="UTF-8"><title>http://www.jsonml.org/</title>'
+        element= JSONML.stringify fixture
+        expect(element).toBe '<meta charset="UTF-8"><title>http://www.jsonml.org/</title>'

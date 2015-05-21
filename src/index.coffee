@@ -37,12 +37,15 @@ class JSONML extends CLI
   @parseElementList: (nodes,trim=yes)->
     i= -1
 
+    # if nodes[0].data is 'boop'
+    #   console.log nodes[0]
+
     elementList= []
     for node in nodes
       element= JSONML.parseElement node,trim
       if typeof element is 'string'
         element= element.trim() if trim
-        element= '' if '&nbsp;' if trim
+        element= '' if element is '&nbsp;' and trim
         
       continue if element?.length is 0
 
@@ -56,9 +59,12 @@ class JSONML extends CLI
     elementList
 
   @parseElement: (node,trim=yes)->
-    {name,attribs,children}= node
+    {type,data,name,attribs,children}= node
 
-    switch node.type
+    switch type
+      when 'directive' then '<'+data+'>'
+      when 'comment' then '<!--'+data+'-->'
+      when 'text' then data
       when 'tag'
         elementList= JSONML.parseElementList children,trim
 
@@ -67,12 +73,9 @@ class JSONML extends CLI
         element.push attribs if Object.keys(attribs).length
         element.push child for child in elementList
         element
-      when 'directive'
-        '<'+node.data+'>'
-      when 'comment'
-        '<!--'+node.data+'-->'
+
       else
-        node.data
+        throw new TypeError 'Invalid node type'
 
   @stringify: (object,replacer,indent)->
     html= ''
