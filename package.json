@@ -11,7 +11,7 @@
     "update": "git tag v$(jqn bower version) &&  git push --tags",
 
     "start": "jasminetea test --verbose --watch",
-    "test": "jasminetea test --verbose",
+    "test": "jasminetea test --verbose --cover --report",
     "posttest": "zuul test/API.spec.coffee --report"
   },
   
