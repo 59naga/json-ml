@@ -4,13 +4,15 @@
   "description": "JsonML parse/stringify function.",
   
   "scripts": {
+    "cover": "jasminetea test --verbose --cover --report",
+
     "Developer commands":"",
       "start": "jasminetea test --verbose",
       "poststart": "zuul test/API.spec.coffee --local 59798 --open",
       "watch": "$(jqn package scripts.start) --watch",
 
     "Travis-CI commands":"",
-      "test": "jasminetea test --verbose --cover --report",
+      "test": "npm run cover",
       "posttest": "zuul test/API.spec.coffee --report",
 
     "Npm update via Travis-CI":"",
@@ -22,6 +24,11 @@
 
     "Bower update":"",
       "update": "git tag v$(jqn bower version) &&  git push --tags"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run build && npm run cover"
+    }
   },
   "browserify": "browserify src -t coffeeify -s JSONML --extension .coffee",
   "files": [
@@ -38,6 +45,7 @@
     "browserify": "^10.2.1",
     "coffeeify": "^1.1.0",
     "coffee-script": "^1.9.2",
+    "ghooks": "^0.3.2",
     "jasmine": "^2.3.1",
     "jasminetea": "^0.1.30-rc.3",
     "jqn": "0.0.3",
