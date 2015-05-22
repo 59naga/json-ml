@@ -1,5 +1,4 @@
 # Json_ml [![NPM version][npm-image]][npm] [![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]
-
 [![Sauce Test Status][sauce-image]][sauce]
 
 > JsonML parse/stringify library
@@ -19,7 +18,7 @@ console.log(JSONML); //function
 $ bower install json_ml --save
 ```
 ```html
-<script src="bower_components/json_ml/json-ml.min.js"></script>
+<script src="bower_components/json_ml/json_ml.min.js"></script>
 <script>
   console.log(JSONML); //function
 </script>
@@ -75,23 +74,6 @@ JSONML.stringify([['ul',['li',{style:"color:red"}],['li',{title:"Some hover text
 //  <li title="Some hover text." style="color:green"></li>
 //  <li><span class="code-example-third"></span></li>
 //</ul>
-```
-
-## CLI
-```bash
-$ npm install json_ml --global
-$ jsonml -V
-# 0.0.0-beta
-
-$ echo '<ul><li style="color:red">First Item</li><li title="Some hover text." style="color:green">Second Item</li><li><span class="code-example-third">Third</span>Item</li></ul>' | jsonml
-# [["ul",["li",{"style":"color:red"}],["li",{"title":"Some hover text.","style":"color:green"}],["li",["span",{"class":"code-example-third"}]]]]
-
-$ jsonml ul.json
-# <ul>
-#   <li style="color:red"></li>
-#   <li title="Some hover text." style="color:green"></li>
-#   <li><span class="code-example-third"></span></li>
-# </ul>
 ```
 
 License
