@@ -1,35 +1,50 @@
 # Dependencies
 htmlparser2= require 'cheerio/node_modules/htmlparser2'
 cheerio= require 'cheerio'
+
 htmlBeautify= require('js-beautify').html
 
-CLI= require './cli'
-
 # Public
-class JSONML extends CLI
-  constructor: (argv)->
-    super argv
-
-    @version (require '../package').version
-    @usage '<stdin / filename>'
-    @option '-i, --indent <digit>','Space indentation',2
-
-    @parse argv
-    .then (data)=>
-      return @help() unless data?
-
-      if data[0] is '['
-        console.log JSONML.stringify (JSON.parse data),null,~~@indent
-      else
-        console.log JSON.stringify (JSONML.parse data),null,~~@indent
-
-      process.exit 0
-
+class JSONML
   # Static
   @stringifyListMode: on
-  @parse: (html,trim=yes)->
-    html= html.outerHTML if html?.outerHTML
+  @stringify: (object,replacer,indent)->
+    html= ''
+    if JSONML.stringifyListMode
+      html+= JSONML.stringifyElement element,replacer for element in object
+    else
+      html+= JSONML.stringifyElement object,replacer
 
+    if indent>0
+      html= htmlBeautify html,
+        indent_size: indent
+        unformatted: ['code','pre','em','strong','span']
+      html= html
+        .replace /^\s*/g, ''
+        .replace /(\r\n|\n){2,}/g,'\n'
+
+    html
+
+  @stringifyElement: (element,replacer)->
+    if typeof element is 'string'
+      node= element
+    else
+      unless typeof element[0] is 'string'
+        throw new TypeError 'Invalid tagName "'+element[0]+'"'
+
+      name= element.shift()
+      attributes= element.shift() if element[0]?.toString() is '[object Object]'
+      elementList= element ? []
+
+      node= cheerio '<'+name+'/>'
+      node.attr attributes if attributes?
+      node.append JSONML.stringifyElement list for list,i in elementList
+
+    node= replacer node if replacer?
+
+    node
+    
+  @parse: (html,trim=yes)->
     nodes= htmlparser2.parseDOM html,{xmlMode:on}
     object= JSONML.parseElementList nodes,trim
     object
@@ -77,40 +92,5 @@ class JSONML extends CLI
       else
         throw new TypeError 'Invalid node type'
 
-  @stringify: (object,replacer,indent)->
-    html= ''
-    if JSONML.stringifyListMode
-      html+= JSONML.stringifyElement element,replacer for element in object
-    else
-      html+= JSONML.stringifyElement object,replacer
-
-    if indent>0
-      html= htmlBeautify html,
-        indent_size: indent
-        unformatted: ['code','pre','em','strong','span']
-      html= html
-        .replace /^\s*/g, ''
-        .replace /(\r\n|\n){2,}/g,'\n'
-
-    html
-
-  @stringifyElement: (element,replacer)->
-    if typeof element is 'string'
-      node= element
-    else
-      unless typeof element[0] is 'string'
-        throw new TypeError 'Invalid tagName "'+element[0]+'"'
-
-      name= element.shift()
-      attributes= element.shift() if element[0]?.toString() is '[object Object]'
-      elementList= element ? []
-
-      node= cheerio '<'+name+'/>'
-      node.attr attributes if attributes?
-      node.append JSONML.stringifyElement list for list,i in elementList
-
-    node= replacer node if replacer?
-
-    node
 
 module.exports= JSONML
