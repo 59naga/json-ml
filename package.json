@@ -1,6 +1,6 @@
 {
   "name": "json_ml",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "JsonML parse/stringify function.",
   
   "scripts": {
@@ -16,6 +16,9 @@
       "posttest": "zuul test/API.spec.coffee --report",
 
     "Npm update via Travis-CI":"",
+      "prepublish": "npm run compile",
+      
+      "precompile": "npm install coffee-script --global",
       "compile": "coffee --bare --compile index.coffee",
       "postcompile": "coffee --output lib --bare --compile src",
 
@@ -33,7 +36,6 @@
   },
   "browserify": "browserify src -t coffeeify -s JSONML --extension .coffee",
   "files": [
-    "package.json",
     "index.js",
     "lib"
   ],
