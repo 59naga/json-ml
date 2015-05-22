@@ -5,6 +5,7 @@
   
   "scripts": {
     "cover": "jasminetea test --verbose --cover --report",
+    "commit": "git commit -am",
 
     "Developer commands":"",
       "start": "jasminetea test --verbose",
@@ -16,14 +17,16 @@
       "posttest": "zuul test/API.spec.coffee --report",
 
     "Npm update via Travis-CI":"",
-      "prepublish": "coffee --bare . && coffee --output lib --bare --compile src",
+      "prepublish": "npm run deploy",
+      "predeploy": "npm install coffee-script --global",
+      "deploy": "coffee --bare . && coffee --output lib --bare --compile src",
 
     "Bower build":"",
       "build": "$(jqn package browserify) | uglifyjs -cm > $(jqn bower main)",
       "postbuild": "wc -c $(jqn bower main)",
 
     "Bower update":"",
-      "update": "git tag v$(jqn bower version) &&  git push --tags"
+      "update-bower": "git tag v$(jqn bower version) && git push --tags"
   },
   "config": {
     "ghooks": {
@@ -32,6 +35,7 @@
   },
   "browserify": "browserify src -t coffeeify -s JSONML --extension .coffee",
   "files": [
+    "package.json",
     "index.js",
     "lib"
   ],
