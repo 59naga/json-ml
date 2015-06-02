@@ -1,44 +1,34 @@
 {
   "name": "json_ml",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-beta.1",
   "description": "JsonML parse/stringify function.",
   
-  "scripts": {
-    "cover": "jasminetea test --verbose --cover --report",
-
-    "Developer commands":"",
-      "start": "jasminetea test --verbose",
-      "poststart": "zuul test/API.spec.coffee --local 59798 --open",
-      "watch": "$(jqn package scripts.start) --watch",
-
-    "Travis-CI commands":"",
-      "test": "npm run cover",
-      "posttest": "zuul test/API.spec.coffee --report",
-
-    "Npm update via Travis-CI":"",
-      "prepublish": "npm run compile",
-      
-      "precompile": "npm install coffee-script --global",
-      "compile": "coffee --bare --compile index.coffee",
-      "postcompile": "coffee --output lib --bare --compile src",
-
-    "Bower build":"",
-      "build": "$(jqn package browserify) | uglifyjs -cm > $(jqn bower main)",
-      "postbuild": "wc -c $(jqn bower main)",
-
-    "Bower update":"",
-      "update-bower": "git tag v$(jqn bower version) && git push --tags"
-  },
-  "config": {
-    "ghooks": {
-      "pre-commit": "npm run build && npm run cover"
-    }
-  },
-  "browserify": "browserify src -t coffeeify -s JSONML --extension .coffee",
   "files": [
     "index.js",
     "lib"
   ],
+
+  "scripts": {
+    "start": "jasminetea test --verbose --watch",
+    "localhost": "zuul test/api.spec.coffee --local 59798 --open",
+
+    "cover": "jasminetea test --verbose --cover --report",
+    "test": "npm run cover",
+    "posttest": "zuul test/api.spec.coffee",
+
+    "prepublish": "node -e \"if(process.env.TRAVIS){}else{process.exit(1)}\" && npm run compile || echo skip prepublish",
+    "compile": "coffee --bare --compile index.coffee",
+    "postcompile": "coffee --output lib --bare --compile src",
+
+    "build": "$(opc bower opc-browserify) | uglifyjs -cm > $(opc bower main)",
+    "postbuild": "wc -c $(opc bower main)",
+    "update": "git tag v$(opc package version) && git push --tags"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run cover"
+    }
+  },
 
   "dependencies": {
     "cheerio": "^0.19.0",
@@ -48,13 +38,11 @@
     "brfs": "^1.4.0",
     "browserify": "^10.2.1",
     "coffeeify": "^1.1.0",
-    "coffee-script": "^1.9.2",
     "ghooks": "^0.3.2",
-    "jasmine": "^2.3.1",
-    "jasminetea": "^0.1.30-rc.3",
-    "jqn": "0.0.3",
+    "jasminetea": "^0.2.0-beta.2",
+    "object-parser-cli": "0.0.1-alpha.0",
     "uglifyjs": "^2.4.10",
-    "zuul": "git://github.com/59naga/zuul.git#5592c010065562e674a0a5d08598359008a518bd"
+    "zuul": "^3.0.0"
   },
 
   "keywords": [

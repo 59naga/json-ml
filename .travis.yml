@@ -4,6 +4,11 @@ cache:
   directories:
     - node_modules
 
+# Ignore version tags
+branches:
+  except:
+    - /^v[0-9]/
+
 # Language options
 language: node_js
 node_js:
@@ -18,6 +23,8 @@ env:
     - secure: PxK6QzGX0e/TZoETDaV7m0MEtL8if03FfcEKfZBmApmI6mCstuD0MNxL34lNxSXnY322CddegT8I2D8U8NzJjrOyT3MJyGASzV2HstJdzspCB1WTcfKued8TFNA6kFAg5ImLZ52m+wZXwgP74RVpcddnx8+ScGwLZSt9IoIArOd6C+9u018tl7klxVNkiRbQTjrxKeP8ykH9Z6ZuEg29V7JYI+/xaz91T6uP4Qmx0GBPBo58rcxMPCFivd8327jkRTBH2hLouf59hClHrlYAbnujTFL8ofwAR3AT1JPk5SOpFwBeEZgIoXOr3ofuJS/xRPZwsIr3FanV02EJmb1ZxWn4T1hDh1r8qgND84LFsGzuLGexaOBkvcUvejKqrfN3qcaAmL3vYkriMVS7n4fTcspZPc1iquHyA7BMqP4lQEsaoKnUnYsu2vvrw/3JWZC6brE84IODjP2b5JRCNic6u6BdzMb2zXRDn/EswA2YBlikD9mzdeyIQfc/su2tJnFx5V2Hj/Py7xXMwM4HTZ83lLuNpXX5hv0GuYoAg+oJzLa0ilsfUhGwCwaBWAM3xeMUCqR94PPgppjemvmaabvPyxHI1DQbvUYM/9wU7vznKyeCRWIZHz6fkqcjo0Mf+EdnRFBElJSg/NG3+7Y4OhOjTVv22kHVP5BWMMqKJPNyJuY=
 
 # Npm publish options
+before_deploy:
+  - npm install coffee-script --global
 deploy:
   provider: npm
   email: i59naga@icloud.com

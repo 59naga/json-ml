@@ -1,8 +1,19 @@
 {
   "name": "json-ml",
   "main": "json_ml.min.js",
-  "version": "0.0.0",
   "description": "JsonML parse/stringify function.",
+
+  "opc-browserify": [
+    "browserify src",
+
+    "--transform",
+    "coffeeify",
+    "--extension",
+    ".coffee",
+
+    "--standalone",
+    "JsonML"
+  ],
 
   "homepage": "https://github.com/59naga/json-ml",
   "authors": [

@@ -1,7 +1,7 @@
 # Json_ml [![NPM version][npm-image]][npm] [![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]
 [![Sauce Test Status][sauce-image]][sauce]
 
-> JsonML parse/stringify library
+> JsonML parse/stringify function
 
 ## Installation
 ### Via npm
@@ -9,8 +9,8 @@
 $ npm install json_ml --save
 ```
 ```js
-var JSONML= require('json_ml');
-console.log(JSONML); //function
+var JsonML= require('json_ml');
+console.log(JsonML); //object
 ```
 
 ### Via bower
@@ -20,7 +20,7 @@ $ bower install json_ml --save
 ```html
 <script src="bower_components/json_ml/json_ml.min.js"></script>
 <script>
-  console.log(JSONML); //function
+  console.log(JsonML); //object
 </script>
 ```
 
@@ -28,12 +28,12 @@ $ bower install json_ml --save
 
 > See: http://www.jsonml.org/
 
-### `JSONML.parse(html, trim=true)`
+### `JsonML.parse(html, trim=true)` -> [Element,Element,...]
 
-Convert `HTML string` to `JsonML object`.
+Convert `HTML string` to `JsonML Elements`.
 
 ```js
-JSONML.parse('<ul><li style="color:red">First Item</li><li title="Some hover text." style="color:green">Second Item</li><li><span class="code-example-third">Third</span>Item</li></ul>');
+JsonML.parse('<ul><li style="color:red">First Item</li><li title="Some hover text." style="color:green">Second Item</li><li><span class="code-example-third">Third</span>Item</li></ul>');
 //[
 //  [
 //    "ul",
@@ -63,12 +63,12 @@ JSONML.parse('<ul><li style="color:red">First Item</li><li title="Some hover tex
 //]
 ```
 
-### `JSONML.stringify(object, replacer, indent)`
+### `JsonML.stringify(object, replacer, indent)` -> HTML
 
-Convert `JsonML object` to `HTML string`.
+Convert `JsonML Elements` to `HTML string`.
 
 ```js
-JSONML.stringify([['ul',['li',{style:"color:red"}],['li',{title:"Some hover text.",style:"color:green"}],['li',['span',{class:'code-example-third'}]]]],null,2);
+JsonML.stringify([['ul',['li',{style:"color:red"}],['li',{title:"Some hover text.",style:"color:green"}],['li',['span',{class:'code-example-third'}]]]],null,2);
 //<ul>
 //  <li style="color:red"></li>
 //  <li title="Some hover text." style="color:green"></li>

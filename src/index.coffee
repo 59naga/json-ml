@@ -5,15 +5,14 @@ cheerio= require 'cheerio'
 htmlBeautify= require('js-beautify').html
 
 # Public
-class JSONML
-  # Static
-  @stringifyListMode: on
-  @stringify: (object,replacer,indent)->
+class JsonML
+  stringifyListMode: on
+  stringify: (object,replacer,indent)->
     html= ''
-    if JSONML.stringifyListMode
-      html+= JSONML.stringifyElement element,replacer for element in object
+    if @stringifyListMode
+      html+= @stringifyElement element,replacer for element in object
     else
-      html+= JSONML.stringifyElement object,replacer
+      html+= @stringifyElement object,replacer
 
     if indent>0
       html= htmlBeautify html,
@@ -25,7 +24,7 @@ class JSONML
 
     html
 
-  @stringifyElement: (element,replacer)->
+  stringifyElement: (element,replacer)->
     if typeof element is 'string'
       node= element
     else
@@ -38,26 +37,23 @@ class JSONML
 
       node= cheerio '<'+name+'/>'
       node.attr attributes if attributes?
-      node.append JSONML.stringifyElement list for list,i in elementList
+      node.append @stringifyElement list for list,i in elementList
 
     node= replacer node if replacer?
 
     node
     
-  @parse: (html,trim=yes)->
+  parse: (html,trim=yes)->
     nodes= htmlparser2.parseDOM html,{xmlMode:on}
-    object= JSONML.parseElementList nodes,trim
+    object= @parseElementList nodes,trim
     object
 
-  @parseElementList: (nodes,trim=yes)->
+  parseElementList: (nodes,trim=yes)->
     i= -1
-
-    # if nodes[0].data is 'boop'
-    #   console.log nodes[0]
 
     elementList= []
     for node in nodes
-      element= JSONML.parseElement node,trim
+      element= @parseElement node,trim
       if typeof element is 'string'
         element= element.trim() if trim
         element= '' if element is '&nbsp;' and trim
@@ -73,15 +69,15 @@ class JSONML
 
     elementList
 
-  @parseElement: (node,trim=yes)->
+  parseElement: (node,trim=yes)->
     {type,data,name,attribs,children}= node
 
     switch type
       when 'directive' then '<'+data+'>'
       when 'comment' then '<!--'+data+'-->'
       when 'text' then data
-      when 'tag'
-        elementList= JSONML.parseElementList children,trim
+      when 'tag','script'
+        elementList= @parseElementList children,trim
 
         element= []
         element.push name if name?
@@ -90,7 +86,7 @@ class JSONML
         element
 
       else
-        throw new TypeError 'Invalid node type'
+        throw new TypeError type+' is Invalid node type'
 
-
-module.exports= JSONML
+module.exports= new JsonML
+module.exports.JsonML= JsonML
