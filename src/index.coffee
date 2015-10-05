@@ -1,5 +1,5 @@
 # Dependencies
-htmlparser2= require 'cheerio/node_modules/htmlparser2'
+htmlparser2= require 'htmlparser2'
 cheerio= require 'cheerio'
 
 htmlBeautify= require('js-beautify').html

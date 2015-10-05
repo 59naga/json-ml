@@ -1,24 +1,22 @@
 {
   "name": "json_ml",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1",
   "description": "JsonML parse/stringify function.",
   
+  "main": "lib",
   "files": [
-    "index.js",
     "lib"
   ],
 
   "scripts": {
-    "start": "jasminetea test --verbose --watch",
-    "localhost": "zuul test/api.spec.coffee --local 59798 --open",
+    "start": "jasminetea --file index.coffee --watch",
+    "test": "jasminetea --file index.coffee --cover --report",
 
-    "cover": "jasminetea test --verbose --cover --report",
-    "test": "npm run cover",
-    "posttest": "zuul test/api.spec.coffee",
+    "localhost": "zuul test --local 59798 --open",
+    "test-cloud": "zuul test",
 
     "prepublish": "node -e \"if(process.env.TRAVIS){}else{process.exit(1)}\" && npm run compile || echo skip prepublish",
-    "compile": "coffee --bare --compile index.coffee",
-    "postcompile": "coffee --output lib --bare --compile src",
+    "compile": "coffee --output lib --bare --compile src",
 
     "build": "$(opc bower opc-browserify) | uglifyjs -cm > $(opc bower main)",
     "postbuild": "wc -c $(opc bower main)",
@@ -26,12 +24,13 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run cover"
+      "pre-commit": "npm test"
     }
   },
 
   "dependencies": {
     "cheerio": "^0.19.0",
+    "htmlparser2": "^3.8.3",
     "js-beautify": "^1.5.5"
   },
   "devDependencies": {
@@ -39,7 +38,7 @@
     "browserify": "^10.2.1",
     "coffeeify": "^1.1.0",
     "ghooks": "^0.3.2",
-    "jasminetea": "^0.2.0-beta.2",
+    "jasminetea": "^0.2.1",
     "object-parser-cli": "0.0.1-alpha.0",
     "uglifyjs": "^2.4.10",
     "zuul": "^3.0.0"
