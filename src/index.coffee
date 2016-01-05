@@ -76,7 +76,7 @@ class JsonML
       when 'directive' then '<'+data+'>'
       when 'comment' then '<!--'+data+'-->'
       when 'text' then data
-      when 'tag','script'
+      when 'tag','script','style'
         elementList= @parseElementList children,trim
 
         element= []
