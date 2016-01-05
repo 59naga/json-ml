@@ -24,6 +24,15 @@ $ bower install json_ml --save
 </script>
 ```
 
+### Via rawgit.com (the simple way)
+
+```html
+<script src="https://cdn.rawgit.com/59naga/json-ml/v0.0.2/json_ml.min.js"></script>
+<script>
+  console.log(JsonML); //object
+</script>
+```
+
 ## API
 
 > See: http://www.jsonml.org/
