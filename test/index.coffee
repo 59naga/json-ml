@@ -82,4 +82,9 @@ describe 'API',->
 
   describe 'Issues',->
     it '#1',->
-      expect(-> JsonML.parse html).not.toThrow() 
+      expect(-> JsonML.parse html).not.toThrow()
+
+    it '#3 TypeError: style is Invalid node type',->
+      object= JsonML.parse '<style>type is style</style>'
+
+      expect(object).toEqual [['style','type is style']]
